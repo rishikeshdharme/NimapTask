@@ -1,0 +1,50 @@
+﻿@model IEnumerable<NimapTask.Models.Product>
+@{
+    ViewBag.Title = "Product List";
+}
+
+<h2>Product List</h2>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Product</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Category Id</th>
+            <th>Category Name</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.CategoryId</td>
+                <td>@item.Category?.CategoryName</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-2">
+@if (ViewBag.HasPrev)
+{
+    <a asp-action="Index" asp-route-page="@(ViewBag.Page - 1)" class="btn btn-secondary">Previous</a>
+}
+@if (ViewBag.HasNext)
+{
+    <a asp-action="Index" asp-route-page="@(ViewBag.Page + 1)" class="btn btn-secondary">Next</a>
+}
+</div>

@@ -1,0 +1,19 @@
+﻿@model Category
+
+<h2>Create Category</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <p style="color:red">Please fix errors below.</p>
+}
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="CategoryName">Category Name</label>
+        <input asp-for="CategoryName" class="form-control" />
+        <span asp-validation-for="CategoryName" style="color:red"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-outline-primary">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Back</a>
+</form>
