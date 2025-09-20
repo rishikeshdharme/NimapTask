@@ -2,19 +2,19 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NimapTask.Appdb;
 using NimapTask.Models;
+using NimapTask.Repository;
+using NimapTask.Service;
 
 namespace NimapTask.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductDal productDal;
-        private readonly ApplicationDbContext context;
-        private readonly CategoryDal categoryDal;
+        private readonly IProductService productDal;
+        private readonly ICategoryService categoryDal;
 
-        public ProductController( ApplicationDbContext context,CategoryDal categoryDal)
+        public ProductController( IProductService productService,ICategoryService categoryDal)
         {
-            this.context = context;
-            this.productDal = new ProductDal(context);
+            this.productDal = productService;
             this.categoryDal = categoryDal;
             
         }
@@ -62,7 +62,7 @@ namespace NimapTask.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = $"Error saving product: {ex.Message}";
+                ViewBag.Error = $"Error saving product";
                 return View(product);
             }
 

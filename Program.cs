@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using NimapTask.Appdb;
 using NimapTask.Models;
+using NimapTask.Repository;
+using NimapTask.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,11 @@ builder.Services.AddControllersWithViews();
 var constr = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(constr));
 
-builder.Services.AddScoped<CategoryDal>();
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddScoped<IProductRepo,ProductRepo>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

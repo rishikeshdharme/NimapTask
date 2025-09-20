@@ -8,6 +8,9 @@ namespace NimapTask.Models
     {
         [Key]
         public int CategoryId { get; set; }
+
+        [Required(ErrorMessage ="Name is Required")]
+
         public string CategoryName { get; set; }
 
         public List<Product> Products { get; set; }

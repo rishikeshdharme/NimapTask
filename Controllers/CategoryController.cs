@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NimapTask.Appdb;
 using NimapTask.Models;
+using NimapTask.Repository;
+using NimapTask.Service;
 
 namespace NimapTask.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly CategoryDal categoryDal;
-        private readonly ApplicationDbContext ap;
-
-        public CategoryController(ApplicationDbContext ap)
+        private readonly ICategoryService categoryDal;
+        
+        public CategoryController(ICategoryService crepo)
         {
-            categoryDal = new CategoryDal(ap);
+            categoryDal = crepo;
 
         }
         public async Task<IActionResult> Index()
